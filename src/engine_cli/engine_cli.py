@@ -1,4 +1,4 @@
-from src.engine_backend.engine_generation import generate_dream_scenario, generate_interaction
+from src.engine_backend.engine_generation import generate_dream_scenario, generate_interaction, load_engine_llm
 import textwrap
 import time
 
@@ -56,6 +56,7 @@ def save_game(context):
 
 if __name__ == "__main__":
     context = ""
+    llm = load_engine_llm()
 
     while(True):
         prompt = ""
@@ -74,9 +75,9 @@ if __name__ == "__main__":
 
         else:
             if(is_new_game):
-                generated_content = generate_dream_scenario(prompt, context)
+                generated_content = generate_dream_scenario(llm, prompt, context)
             else:
-                generated_content = generate_interaction(prompt, context)
+                generated_content = generate_interaction(llm, prompt, context)
             
             context = f"{context}\n{prompt}\n{generated_content}\n"
             print()
