@@ -1,7 +1,10 @@
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments
+import os
+from dotenv import load_dotenv
 
-HF_TOKEN = (open("/root/.cache/huggingface/token", "r")).read()
+load_dotenv() 
+HF_TOKEN = os.environ.get('HF_API_KEY')
 
 def load_peft_llm(peft_model_id, base_model_id):
     compute_dtype = getattr(torch, "float16")
@@ -20,6 +23,6 @@ def load_peft_llm(peft_model_id, base_model_id):
         quantization_config=quantization_config,
     )
 
-    base_model = AutoModelForCausalLM.from_pretrained(base_model_id, **model_kwargs)
-    config = PeftConfig.from_pretrained(peft_model_id)
-    return PeftModel.from_pretrained(base_model, peft_model_id)
+    #base_model = AutoModelForCausalLM.from_pretrained(base_model_id, **model_kwargs, token=HF_TOKEN)
+    #config = PeftConfig.from_pretrained(peft_model_id)
+    return None #PeftModel.from_pretrained(base_model, peft_model_id)
