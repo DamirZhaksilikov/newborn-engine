@@ -1,4 +1,6 @@
 .env
 *.egg-info
 __pycache__
-/output/*
+/output
+/datasets
+/models

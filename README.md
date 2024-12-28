@@ -4,9 +4,10 @@ To run, install the following dependencies
 
 ```
 pip install 'transformers[torch]'
-pip install bitsandbytes peft
-pip install pinecone-client pinecone-notebooks
+pip install 'bitsandbytes' 'peft'
+pip install 'pinecone-client' 'pinecone-notebooks'
 pip install python-dotenv
+pip install flash-attn --no-build-isolation
 ```
 
 Then to use the program, navigate to the CLI directory and run
